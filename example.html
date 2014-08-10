@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript">
+
+    /* global quantify:true */
+    function afterLoaded() {
+      var measures = quantify
+        .measure('timeTillDOMAvailable', 'navigationStart', 'domInteractive')
+        .measure('pageReady', 'domInteractive', 'domComplete')
+        .values();
+      console.log(measures);
+    }
+
+    var times = 10;
+    function next () {
+      quantify.mark('begin_txt');
+      // pretend to be async network requests
+      var txt = [
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+        "Etiam viverra magna id magna dapibus tincidunt. Etiam nunc ligula, ",
+        "mollis vel eros non, hendrerit bibendum velit. Quisque risus ipsum, ",
+        "pellentesque id molestie ut, luctus mollis neque. Sed molestie non ",
+        "urna ut aliquam. Mauris eu enim porttitor, vestibulum erat et, ",
+        "iaculis turpis. Vestibulum laoreet fringilla orci, a egestas justo. ",
+        "Donec sagittis rhoncus nulla, non bibendum leo facilisis at. ",
+        "Curabitur posuere metus id elit tristique, vel accumsan neque mollis. ",
+        "Morbi mollis sodales eros, viverra dignissim magna. Suspendisse ",
+        "potenti. Mauris ullamcorper nunc varius risus dignissim, et sodales ",
+        "turpis placerat. Sed id odio nec lectus gravida mattis. Aenean ",
+        "laoreet metus molestie neque suscipit, vitae ultrices metus pretium. ",
+        "Aenean sit amet ante et nulla venenatis rutrum quis sed elit."
+      ];
+      var span = document.createElement('span');
+      span.innerHTML = txt.join('');
+      var elem = document.getElementById('next');
+      elem.appendChild(span);
+      quantify.mark('end_txt');
+      quantify.measure('txt', 'begin_txt', 'end_txt');
+      if (times < 0) {
+        quantify.mark('fullyLoaded');
+        afterLoaded();
+      } else {
+        times--;
+        setTimeout(next, 500);
+      }
+    }
+    setTimeout(next, 100);
+  </script>
+
+</head>
+<body>
+  <a href="#next">Next Page</a>
+  <div id="next"></div>
+</body>
+</html>

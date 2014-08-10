@@ -1,0 +1,28 @@
+{
+  "name": "quantify",
+  "version": "0.0.0",
+  "description": "Helpers around the User Timings API",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sugendran/quantify.git"
+  },
+  "keywords": [
+    "performance",
+    "timings",
+    "user",
+    "timings"
+  ],
+  "author": "Sugendran Ganess",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sugendran/quantify/issues"
+  },
+  "homepage": "https://github.com/sugendran/quantify",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
